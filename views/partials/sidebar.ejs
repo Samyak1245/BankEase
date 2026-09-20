@@ -1,0 +1,31 @@
+<aside class="sidebar">
+  <div class="sidebar-nav">
+    <a class="nav-link <%= currentPath === '/' ? 'active' : '' %>" href="/">
+      <i class="bi bi-speedometer2"></i> Dashboard
+    </a>
+    <a class="nav-link <%= currentPath.startsWith('/customers') ? 'active' : '' %>" href="/customers">
+      <i class="bi bi-people"></i> Customers
+    </a>
+    <a class="nav-link <%= currentPath.startsWith('/accounts') ? 'active' : '' %>" href="/accounts">
+      <i class="bi bi-wallet2"></i> Accounts
+    </a>
+    <a class="nav-link <%= currentPath.startsWith('/transactions') ? 'active' : '' %>" href="/transactions">
+      <i class="bi bi-arrow-left-right"></i> Transactions
+    </a>
+    <a class="nav-link <%= currentPath.startsWith('/loans') && !currentPath.startsWith('/loan-payments') ? 'active' : '' %>" href="/loans">
+      <i class="bi bi-bank"></i> Loans
+    </a>
+    <a class="nav-link <%= currentPath.startsWith('/loan-payments') ? 'active' : '' %>" href="/loan-payments">
+      <i class="bi bi-receipt"></i> Loan Payments
+    </a>
+    <a class="nav-link <%= currentPath.startsWith('/branches') ? 'active' : '' %>" href="/branches">
+      <i class="bi bi-building"></i> Branches
+    </a>
+    <a class="nav-link <%= currentPath.startsWith('/employees') ? 'active' : '' %>" href="/employees">
+      <i class="bi bi-person-badge"></i> Employees
+    </a>
+  </div>
+  <a class="nav-link logout-link" href="/logout">
+    <i class="bi bi-box-arrow-left"></i> Logout
+  </a>
+</aside>

@@ -1,0 +1,130 @@
+<div class="page-header">
+  <div>
+    <h1>Customers</h1>
+    <p class="text-muted mb-0">View, add, edit and search customer records</p>
+  </div>
+  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCustomerModal">
+    <i class="bi bi-plus-lg"></i> Add Customer
+  </button>
+</div>
+
+<form class="search-bar" method="GET" action="/customers">
+  <input class="form-control" type="search" name="q" value="<%= search %>" placeholder="Search by name, email or phone">
+  <button class="btn btn-outline-primary" type="submit">Search</button>
+  <a class="btn btn-outline-secondary" href="/customers">Reset</a>
+</form>
+
+<div class="card panel-card">
+  <div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>Address</th>
+          <th>Date of Birth</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (!customers.length) { %>
+          <tr><td colspan="7" class="text-center text-muted py-4">No customers found.</td></tr>
+        <% } %>
+        <% customers.forEach(function(c) { %>
+          <tr>
+            <td><%= c.customer_id %></td>
+            <td><%= c.name %></td>
+            <td><%= c.phone %></td>
+            <td><%= c.email %></td>
+            <td><%= c.address || "-" %></td>
+            <td><%= c.date_of_birth || "-" %></td>
+            <td class="text-nowrap">
+              <a class="btn btn-sm btn-outline-primary" href="/customers/<%= c.customer_id %>/edit">Edit</a>
+              <form class="d-inline" method="POST" action="/customers/<%= c.customer_id %>/delete" onsubmit="return confirm('Delete this customer?');">
+                <button class="btn btn-sm btn-outline-danger" type="submit">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="modal fade" id="addCustomerModal" tabindex="-1">
+  <div class="modal-dialog">
+    <form class="modal-content" method="POST" action="/customers">
+      <div class="modal-header">
+        <h5 class="modal-title">Add Customer</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Name</label>
+          <input class="form-control" name="name" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input class="form-control" type="email" name="email" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Phone (10 digits)</label>
+          <input class="form-control" name="phone" required maxlength="10">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Address</label>
+          <input class="form-control" name="address">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Date of Birth</label>
+          <input class="form-control" type="date" name="date_of_birth">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-primary" type="submit">Save Customer</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<% if (editCustomer) { %>
+<div class="modal fade" id="editCustomerModal" tabindex="-1">
+  <div class="modal-dialog">
+    <form class="modal-content" method="POST" action="/customers/<%= editCustomer.customer_id %>/edit">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Customer</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Name</label>
+          <input class="form-control" name="name" required value="<%= editCustomer.name %>">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input class="form-control" type="email" name="email" required value="<%= editCustomer.email %>">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Phone (10 digits)</label>
+          <input class="form-control" name="phone" required maxlength="10" value="<%= editCustomer.phone %>">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Address</label>
+          <input class="form-control" name="address" value="<%= editCustomer.address || '' %>">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Date of Birth</label>
+          <input class="form-control" type="date" name="date_of_birth" value="<%= editCustomer.date_of_birth || '' %>">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-secondary" href="/customers">Cancel</a>
+        <button class="btn btn-primary" type="submit">Update Customer</button>
+      </div>
+    </form>
+  </div>
+</div>
+<% } %>

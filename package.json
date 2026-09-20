@@ -1,0 +1,24 @@
+{
+  "name": "banking-management-system",
+  "version": "1.0.0",
+  "description": "College DBMS mini-project: Banking Management System using Node.js, Express, EJS and MySQL",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [
+    "dbms",
+    "mysql",
+    "express",
+    "college-project"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-ejs-layouts": "^2.5.1",
+    "mysql2": "^3.11.5"
+  }
+}

@@ -1,0 +1,70 @@
+<div class="page-header">
+  <div>
+    <h1>Dashboard</h1>
+    <p class="text-muted mb-0">Overview of customers, accounts, transactions and loans</p>
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-md-6 col-xl-3">
+    <div class="stat-card">
+      <div class="stat-label">Total Customers</div>
+      <div class="stat-value"><%= stats.totalCustomers %></div>
+    </div>
+  </div>
+  <div class="col-md-6 col-xl-3">
+    <div class="stat-card">
+      <div class="stat-label">Total Accounts</div>
+      <div class="stat-value"><%= stats.totalAccounts %></div>
+    </div>
+  </div>
+  <div class="col-md-6 col-xl-3">
+    <div class="stat-card">
+      <div class="stat-label">Total Transactions</div>
+      <div class="stat-value"><%= stats.totalTransactions %></div>
+    </div>
+  </div>
+  <div class="col-md-6 col-xl-3">
+    <div class="stat-card">
+      <div class="stat-label">Active Loans</div>
+      <div class="stat-value"><%= stats.activeLoans %></div>
+    </div>
+  </div>
+</div>
+
+<div class="card panel-card">
+  <div class="card-header">Recent Transactions</div>
+  <div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+      <thead>
+        <tr>
+          <th>Transaction ID</th>
+          <th>Account ID</th>
+          <th>Type</th>
+          <th>Amount (INR)</th>
+          <th>Date</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (!recentTransactions.length) { %>
+          <tr><td colspan="6" class="text-center text-muted py-4">No transactions yet.</td></tr>
+        <% } %>
+        <% recentTransactions.forEach(function(tx) { %>
+          <tr>
+            <td><%= tx.transaction_id %></td>
+            <td><%= tx.account_id %></td>
+            <td>
+              <span class="badge <%= tx.transaction_type === 'Deposit' ? 'text-bg-success' : 'text-bg-warning' %>">
+                <%= tx.transaction_type %>
+              </span>
+            </td>
+            <td>₹ <%= Number(tx.amount).toLocaleString("en-IN") %></td>
+            <td><%= tx.transaction_date %></td>
+            <td><%= tx.description || "-" %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>
