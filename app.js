@@ -93,6 +93,7 @@ app.use((err, req, res, next) => {
   res.status(500).send("Something went wrong. Please check the server logs and MySQL connection.");
 });
 
-app.listen(PORT, () => {
-  console.log(`Banking Management System running at http://localhost:${PORT}`);
+
+app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Banking Management System running on port ${PORT}`);
 });
