@@ -2,6 +2,8 @@
 
 College DBMS mini-project built with **Node.js**, **Express**, **EJS**, and **MySQL**.
 
+Prototype: [Live Website](https://bankease-production.up.railway.app/)
+
 This is a simple admin dashboard for customers, accounts, deposits/withdrawals, loans, loan payments, branches, and employees. It is **not** a real banking product.
 
 ## Tech stack
